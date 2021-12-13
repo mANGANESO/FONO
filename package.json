@@ -1,0 +1,29 @@
+{
+  "name": "redes_pagina_con_nodejs",
+  "version": "1.0.0",
+  "description": "## Preparar y correr el servidor en nuestra computadora: * Instalar NodeJS   * https://nodejs.org/es/download/",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fortunatoramirez/redes_pagina_con_nodejs.git"
+  },
+  "keywords": [
+    "servidor",
+    "http",
+    "nodejs"
+  ],
+  "author": "Fortunato",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fortunatoramirez/redes_pagina_con_nodejs/issues"
+  },
+  "homepage": "https://github.com/fortunatoramirez/redes_pagina_con_nodejs#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "express": "^4.17.1",
+    "mongoose": "^6.1.1"
+  }
+}
