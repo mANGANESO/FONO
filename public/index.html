@@ -2,31 +2,37 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>FONO</title>
-    <link rel="icon" type="image/png" href="imagenes/Favicon.png" />
-	<link rel="stylesheet" type="text/css" href="estilos.css" /> 
-    
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ENVIAR VOZ</title>
 </head>
+
+ <audio id="Audio"></audio>
 <body>
-    <img src="./imagenes/Favicon.png" width="450" height="450">
-    <p>
-        Hola, bienvenido a FONO<br>
-    </p>
-    <form action="/authenticate" method="POST">
-        <h2>Inicio de sesión</h2>
-        <div class="section">
-         <div class="title">Usuario</div>
-         <div class="field"><input type="text" id="username" name="username"></div>
-        </div>
-        <div class="section">
-         <div class="title">Contraseña</div>  
-         <div class="field"><input type="password" id="password" name="password"></div> 
-        </div>
-        <div class="section">
-          <div class="button"><input type="submit" value="Iniciar sesión"></div>
-          <div class="button"><a href="index2.html">Registrarse</a></div>
-        </div>
-    </form>
-    <footer>Fred Cruz- Copyright Todos los derechos reservados 2021 </footer>
+	<script>
+    var constraints = { audio: true };
+    navigator.mediaDevices.getUserMedia(constraints).then(function(mediaStream) {
+    var mediaRecorder = new MediaRecorder(mediaStream);
+    mediaRecorder.onstart = function(e) {
+    this.chunks = [];
+    };
+    mediaRecorder.ondataavailable = function(e) {
+    this.chunks.push(e.data);
+    };
+    mediaRecorder.onstop = function(e) {
+    var blob = new Blob(this.chunks, { 'type' : 'audio/ogg; codecs=opus' });
+    socket.emit('radio', blob);
+    };
+
+    // Start recording
+    mediaRecorder.start();
+
+    // Stop recording after 5 seconds and broadcast it to server
+    setInterval(() => {
+    mediaRecorder.stop()
+    mediaRecorder.start()
+    }, 5000);
+   });
+
+	</script>
 </body>
 </html>

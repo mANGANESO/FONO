@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>PAGINA PARA ESCUCHAR COSAS</title>
+</head>
+<body> 
+  <audio></audio>
+  <script>
+  socket.on('voice', function(arrayBuffer) {
+  var blob = new Blob([arrayBuffer], { 'type' : 'audio/ogg; codecs=opus' });
+  var audio = document.createElement('audio');
+  audio.src = window.URL.createObjectURL(blob);
+  audio.play();
+  }); 
+  </script>
+</body>
+</html>
